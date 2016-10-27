@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Ninjeditor | Example 1</title>
+		<script src="../src/ninjeditor.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+			.my-editor {
+				background: #eee;
+				color: #333;
+				font-family: arial;
+				padding: 10px;
+			}
+			
+			.ninjeditor-toolbar {
+				background: #eee;
+				border-radius: 5px;
+				box-shadow: 0 0 3px #777;
+			}
+			
+			.ninjeditor-group {
+				display: inline-block;
+				position: relative;
+				vertical-align: middle;
+			}
+			.ninjeditor-group:nth-child(n + 2) {
+				margin-left: 10px;
+			}
+			
+			.ninjeditor-btn {
+				background: transparent;
+				border: none;
+				cursor: pointer;
+				line-height: 2;
+				padding-right: 8px;
+				padding-left: 8px;
+			}
+			.ninjeditor-btn:hover, .ninjeditor-btn:focus {
+				background: rgba(0, 0, 0, 0.05);
+			}
+			.ninjeditor-btn:active {
+				background: rgba(0, 0, 0, 0.1);
+			}
+			
+			.ninjeditor-dropdown {
+				background: rgba(255, 255, 255, 0.9);
+				box-shadow: 1px 1px 8px #aaa;
+				/*display: none;*/
+				list-style: none;
+				margin: 0;
+				min-width: 100%;
+				padding: 0;
+				position: absolute;
+				left: 0;
+				text-align: center;
+			}
+			.ninjeditor-dropdown > li {
+				cursor: pointer;
+				padding: 3px 0;
+			}
+			.ninjeditor-dropdown > li:hover, .ninjeditor-dropdown > li:focus {
+				background: rgba(0, 0, 0, 0.05);
+			}
+			.ninjeditor-dropdown > li:active {
+				background: rgba(0, 0, 0, 0.1);
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			var editor = new Ninjeditor({
+				attrs: {class: 'my-editor'},
+				autosave: true,
+				toolbar: 'basic',
+				// type: 'inline',
+				val: '<h2>Edit Me!</h2>'
+			}).onSave(function(val) {
+				console.log(val)
+			});
+			
+			var editor2 = new Ninjeditor({
+				attrs: {class: 'my-editor'},
+				toolbar: [
+					{type: 'group', children: ['h1', 'h2']},
+					{type: 'dropdown', text: 'font style', children: ['italic', 'bold', 'underline', 'strikethrough']},
+					'text-left',
+					'text-center',
+					'text-right'
+				],
+				val: 'Click on me to edit me'
+			});
+			
+			document.body.appendChild(editor.el);
+			document.body.appendChild(editor2.el);
+		</script>
+	</body>
+</html>
